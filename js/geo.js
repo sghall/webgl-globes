@@ -1,3 +1,27 @@
+export function getLatLng(vector, radius) {
+  radius = radius || 200;
+
+  var latRads = Math.acos(vector.y / radius);
+  var lngRads = Math.atan2(vector.z, vector.x);
+  var lat = (Math.PI / 2 - latRads) * (180 / Math.PI);
+  var lng = (Math.PI - lngRads) * (180 / Math.PI);
+
+  return [lat, lng - 180];
+}
+
+export function getXYZ(point, radius) {
+  radius = radius || 200;
+
+  var latRads = ( 90 - point[0]) * Math.PI / 180;
+  var lngRads = (180 - point[1]) * Math.PI / 180;
+
+  var x = radius * Math.sin(latRads) * Math.cos(lngRads);
+  var y = radius * Math.cos(latRads);
+  var z = radius * Math.sin(latRads) * Math.sin(lngRads);
+
+  return new THREE.Vector3(x, y, z);
+}
+
 export var geodecoder = function (features) {
 
   var store = {}
