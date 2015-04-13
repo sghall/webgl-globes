@@ -1,15 +1,15 @@
 
 var projection = d3.geo.equirectangular()
-  .translate([1000, 500])
-  .scale(320);
+  .translate([2000, 1000])
+  .scale(640);
 
 export function mapTexture(json, fill, color) {
   var texture, context, canvas;
 
   canvas = d3.select("body").append("canvas")
     .style("display", "none")
-    .attr("width", "2000px")
-    .attr("height", "1000px");
+    .attr("width", "4000px")
+    .attr("height", "2000px");
 
   context = canvas.node().getContext("2d");
 
@@ -19,7 +19,7 @@ export function mapTexture(json, fill, color) {
 
   context.strokeStyle = "#000000";
   context.lineWidth = 0.25;
-  context.fillStyle = color || "blue";
+  context.fillStyle = color || "#CDB380";
 
   context.beginPath();
 
