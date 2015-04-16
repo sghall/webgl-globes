@@ -20,6 +20,7 @@
     "stats.js": "*",
     "topojson": "~1.6.18",
     "traceur": "~0.0.88",
-    "es6-module-loader": "~0.16.5"
+    "es6-module-loader": "~0.16.5",
+    "foundation": "zurb/bower-foundation#~5.4.7"
   }
 }
