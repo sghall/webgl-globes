@@ -68,10 +68,10 @@ d3.json('data/world.json', function (err, data) {
     console.log("temp", temp.rotation, root.position)
 
     // tween camera to that new position and rotation;
-    var tweenPos = getTween.call(camera, 'position', temp.position);
+    var tweenPos = getTween.call(camera, 'position', temp.position, 1000);
     d3.timer(tweenPos);
 
-    var tweenRot = getTween.call(camera, 'rotation', temp.rotation);
+    var tweenRot = getTween.call(camera, 'rotation', temp.rotation, 500);
     d3.timer(tweenRot);
 
     // See if a country exists at that location
