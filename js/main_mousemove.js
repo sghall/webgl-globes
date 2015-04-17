@@ -2,7 +2,7 @@ import { scene, camera, renderer, canvas } from 'js/scene';
 import { raycast } from 'js/events';
 import { getXYZ, getLatLng, geodecoder } from 'js/geo';
 import { mapTexture } from 'js/canvas';
-import { getTween } from 'js/utils';
+import { getTween, memoize } from 'js/utils';
 
 d3.json('data/world.json', function (err, data) {
   var world, earth, sphere, overlay, currentCountry;
