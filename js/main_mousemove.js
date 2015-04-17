@@ -1,7 +1,8 @@
-import { scene, camera, renderer, canvas } from 'modules/scene-dev';
-import { raycast } from 'modules/events';
-import { getXYZ, getLatLng, getTween } from 'modules/helpers';
-import { geodecoder, mapTexture, memoize } from 'modules/geo-helpers';
+import { scene, camera, renderer, canvas } from 'js/scene';
+import { raycast } from 'js/events';
+import { getXYZ, getLatLng, geodecoder } from 'js/geo';
+import { mapTexture } from 'js/canvas';
+import { getTween } from 'js/utils';
 
 d3.json('data/world.json', function (err, data) {
   var world, earth, sphere, overlay, currentCountry;
