@@ -23,6 +23,7 @@ d3.json('data/world.json', function (err, data) {
   globe.scale.set(2.75, 2.75, 2.75);
   globe.addEventListener('click', onGlobeClick);
   globe.addEventListener('mousemove', onGlobeMousemove);
+
   // add country outlines
   world  = mapTexture(countries, false);
   earth  = new THREE.MeshBasicMaterial({map: world, transparent: true});
@@ -30,6 +31,7 @@ d3.json('data/world.json', function (err, data) {
   var outlines = new THREE.Mesh(sphere, earth);
   outlines.rotation.y = Math.PI;
   outlines.scale.set(2.75, 2.75, 2.75);
+
   // create a container node and add the two meshes
   var root = new THREE.Object3D();
   root.add(globe);
