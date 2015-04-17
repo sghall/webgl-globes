@@ -14,10 +14,10 @@ d3.json('data/world.json', function (err, data) {
     
     return mapTexture(country, fill, color);
   }); 
-  // Add image texture
-  world  = THREE.ImageUtils.loadTexture('images/2_no_clouds_4k.jpg');
-  earth  = new THREE.MeshBasicMaterial({map: world, transparent: true});
+  // Base globe
+  earth  = new THREE.MeshBasicMaterial({color: '#033649', transparent: true});
   sphere = new THREE.SphereGeometry(200, segments, segments);
+
   var globe = new THREE.Mesh(sphere, earth);
   globe.rotation.y = Math.PI;
   globe.scale.set(2.75, 2.75, 2.75);
