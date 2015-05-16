@@ -2,16 +2,16 @@ import THREE from 'THREE';
 import d3 from 'd3';
 
 var projection = d3.geo.equirectangular()
-  .translate([2000, 1000])
-  .scale(640);
+  .translate([1024, 512])
+  .scale(325);
 
 export function mapTexture(json, fill, color) {
   var texture, context, canvas;
 
   canvas = d3.select("body").append("canvas")
     .style("display", "none")
-    .attr("width", "4000px")
-    .attr("height", "2000px");
+    .attr("width", "2048px")
+    .attr("height", "1024px");
 
   context = canvas.node().getContext("2d");
 
@@ -19,8 +19,8 @@ export function mapTexture(json, fill, color) {
     .projection(projection)
     .context(context);
 
-  context.strokeStyle = "#000000";
-  context.lineWidth = 0.25;
+  context.strokeStyle = "grey";
+  context.lineWidth = 0.50;
   context.fillStyle = color || "#CDB380";
 
   context.beginPath();
@@ -33,7 +33,7 @@ export function mapTexture(json, fill, color) {
 
   context.stroke();
 
-  // DEBUGGING
+  // DEBUGGING - Really expensive, disable when done.
   // console.log(canvas.node().toDataURL());
 
   texture = new THREE.Texture(canvas.node());

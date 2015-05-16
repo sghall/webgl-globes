@@ -1,0 +1,18 @@
+{
+  parser: "babel-eslint",
+  ecmaFeatures: {
+    modules: true
+  },
+  env: {
+    browser: true
+  },
+  rules: {
+    "strict": 0,
+    "no-multi-spaces": false,
+    "quotes": "single",
+    "no-cond-assign": false,
+    "no-unused-expressions": false,
+    "no-underscore-dangle": false,
+    "no-use-before-define": false
+  }
+}
