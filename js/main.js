@@ -1,8 +1,12 @@
-import { scene, camera, renderer, canvas } from 'js/scene';
+import { scene, camera, renderer, canvas } from './scene';
 import { raycast } from 'js/events';
-import { getXYZ, getLatLng, geodecoder } from 'js/geo';
-import { mapTexture } from 'js/canvas';
-import { getTween } from 'js/utils';
+import { getXYZ, getLatLng, geodecoder } from './geo';
+import { mapTexture } from './canvas';
+import topojson from 'topojson';
+import { getTween } from './utils';
+import d3 from 'd3';
+
+console.log(topojson)
 
 d3.json('data/world.json', function (err, data) {
   var world, earth, sphere, overlay;
@@ -68,10 +72,10 @@ d3.json('data/world.json', function (err, data) {
     console.log("temp", temp.rotation, root.position)
 
     // tween camera to that new position and rotation;
-    var tweenPos = getTween.call(camera, 'position', temp.position, 1000);
+    var tweenPos = getTween.call(camera, 'position', temp.position);
     d3.timer(tweenPos);
 
-    var tweenRot = getTween.call(camera, 'rotation', temp.rotation, 500);
+    var tweenRot = getTween.call(camera, 'rotation', temp.rotation);
     d3.timer(tweenRot);
 
     // See if a country exists at that location

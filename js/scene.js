@@ -1,3 +1,5 @@
+import THREE from 'THREE';
+import d3 from 'd3';
 
 export var canvas = d3.select("body").append("canvas")
   .attr("width", window.innerWidth)
