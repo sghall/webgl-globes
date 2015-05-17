@@ -21,10 +21,11 @@ d3.json('data/world.json', function (err, data) {
     return mapTexture(country, color);
   });
 
+  // Geometry/material for the point that follows cursor
   let pointGeometry = new THREE.SphereGeometry(1, 10, 10);
   let pointMaterial = new THREE.MeshPhongMaterial({color: 'red'});
 
-  // Base globe with blue "water"
+  // Base globe with grey "water" material
   let blueMaterial = new THREE.MeshPhongMaterial({color: '#2B3B59', transparent: true});
   let sphere = new THREE.SphereGeometry(200, segments, segments);
   let baseGlobe = new THREE.Mesh(sphere, blueMaterial);
