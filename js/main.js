@@ -104,8 +104,6 @@ d3.json('data/world.json', function (err, data) {
 
   setEvents(camera, [baseGlobe], 'click');
   setEvents(camera, [baseGlobe], 'mousemove', 10);
-  setEvents(camera, [baseGlobe], 'touchstart', 10);
-
 });
 
 function animate() {
