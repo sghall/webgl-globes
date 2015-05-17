@@ -44,9 +44,9 @@ export function convertToXYZ(point, radius) {
 
 export var geodecoder = function (features) {
 
-  var store = {};
+  let store = {};
 
-  for (var i = 0; i < features.length; i++) {
+  for (let i = 0; i < features.length; i++) {
     store[features[i].id] = features[i];
   }
 
@@ -56,9 +56,9 @@ export var geodecoder = function (features) {
     },
     search: function (lat, lng) {
 
-      var match = false;
+      let match = false;
 
-      var country, coords;
+      let country, coords;
 
       for (let i = 0; i < features.length; i++) {
         country = features[i];
@@ -72,7 +72,7 @@ export var geodecoder = function (features) {
           }
         } else if (country.geometry.type === 'MultiPolygon') {
           coords = country.geometry.coordinates;
-          for (var j = 0; j < coords.length; j++) {
+          for (let j = 0; j < coords.length; j++) {
             match = pointInPolygon(coords[j][0], [lng, lat]);
             if (match) {
               return {
@@ -92,12 +92,12 @@ export var geodecoder = function (features) {
 // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 var pointInPolygon = function(poly, point) {
 
-  var x = point[0];
-  var y = point[1];
+  let x = point[0];
+  let y = point[1];
 
-  var inside = false, xi, xj, yi, yj, xk;
+  let inside = false, xi, xj, yi, yj, xk;
 
-  for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
     xi = poly[i][0];
     yi = poly[i][1];
     xj = poly[j][0];
