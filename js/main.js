@@ -87,7 +87,6 @@ d3.json('data/world.json', function (err, data) {
 
        // Overlay the selected country
       map = textureCache(country.code, '#CDC290');
-
       material = new THREE.MeshPhongMaterial({map: map, transparent: true});
       if (!overlay) {
         overlay = new THREE.Mesh(new THREE.SphereGeometry(201, 40, 40), material);
@@ -101,6 +100,8 @@ d3.json('data/world.json', function (err, data) {
 
   setEvents(camera, [baseGlobe], 'click');
   setEvents(camera, [baseGlobe], 'mousemove', 10);
+  setEvents(camera, [baseGlobe], 'touchstart', 10);
+
 });
 
 function animate() {

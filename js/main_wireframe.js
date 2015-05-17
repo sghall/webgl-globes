@@ -39,7 +39,7 @@ d3.json('data/world.json', function (err, data) {
   var baseMap = new THREE.Mesh(new THREE.SphereGeometry(200, segments, segments), mapMaterial);
   baseMap.rotation.y = Math.PI;
 
-  // add base map layer with all countries
+  // add wireframe layer
   let wireMaterial  = new THREE.MeshPhongMaterial({wireframe: true, transparent: true});
   var wireFrame = new THREE.Mesh(new THREE.SphereGeometry(201, segments, segments), wireMaterial);
   wireFrame.rotation.y = Math.PI;

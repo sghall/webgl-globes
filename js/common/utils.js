@@ -41,8 +41,8 @@ export function debounce(func, wait, immediate) {
 export var getTween = function (prop, to, time) {
   time = time || 500;
   var node = this;
-  var from = node[prop];
-  var interpol = d3.interpolateObject(from, to);
+  var curr = node[prop];
+  var interpol = d3.interpolateObject(curr, to);
   return function (t) {
     node[prop].copy(interpol(t / time));
     if (t >= time) {
