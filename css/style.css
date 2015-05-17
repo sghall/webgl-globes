@@ -1,5 +1,5 @@
 body, html {
-  background-color: #999;
+  background-color: #333;
   margin: 0px;
   font-family: helvetica, arial;
   color: #333;
@@ -12,12 +12,16 @@ body, html {
 }
 
 #info {
+  color: white;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
-  left: 9px;
-  top: 9px;
+  left: 25px;
+  top: 25px;
   z-index: 1;
+}
+
+#msg {
+  font: 60px helvetica, arial;
 }
 
 #info h3 {
