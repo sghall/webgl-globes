@@ -10,7 +10,7 @@ import d3 from 'd3';
 d3.json('data/world.json', function (err, data) {
   var currentCountry, overlay;
 
-  var segments = 150; // number of vertices. Higher = better mouse accuracy
+  var segments = 155; // number of vertices. Higher = better mouse accuracy
 
   // Setup cache for country textures
   var countries = topojson.feature(data, data.objects.countries);
@@ -52,6 +52,14 @@ d3.json('data/world.json', function (err, data) {
     temp.position.copy(convertToXYZ(latlng, 900));
     temp.lookAt(root.position);
     temp.rotateY(Math.PI);
+
+    for (let key in temp.rotation) {
+      if (temp.rotation[key] - camera.rotation[key] > Math.PI) {
+        temp.rotation[key] -= Math.PI * 2;
+      } else if (camera.rotation[key] - temp.rotation[key] > Math.PI) {
+        temp.rotation[key] += Math.PI * 2;
+      }
+    }
 
     var tweenPos = getTween.call(camera, 'position', temp.position);
     d3.timer(tweenPos);
