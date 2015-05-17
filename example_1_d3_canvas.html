@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
+    <div id="loading">Loading...</div>
     <script src="node_modules/d3/d3.js"></script>
     <script src="node_modules/topojson/topojson.js"></script>
     <script>
@@ -16,6 +17,9 @@
         .translate([512, 256]).scale(163);
 
       d3.json('data/world.json', function (err, data) {
+
+        d3.select("#loading").transition().duration(500)
+          .style("opacity", 0).remove();
 
         var countries = topojson.feature(data, data.objects.countries);
 

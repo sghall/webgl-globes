@@ -8,6 +8,10 @@ import THREE from 'THREE';
 import d3 from 'd3';
 
 d3.json('data/world.json', function (err, data) {
+
+  d3.select("#loading").transition().duration(500)
+    .style("opacity", 0).remove();
+
   var currentCountry, overlay;
 
   var segments = 155; // number of vertices. Higher = better mouse accuracy
