@@ -3,7 +3,7 @@ import { debounce } from './utils';
 
 var raycaster = new THREE.Raycaster();
 
-export function raycast(camera, items, type, wait) {
+export function setEvents(camera, items, type, wait) {
 
   var listener = function(event) {
 

@@ -1,6 +1,6 @@
 import { scene, camera, renderer } from './common/scene';
 import { setEvents } from './common/setEvents';
-import { convertToXYZ, getEventCenter, geodecoder } from './common/geoHelpers';
+import { convertToXYZ, getEventCenter, geodecoder, getPoint } from './common/geoHelpers';
 import { mapTexture } from './common/mapTexture';
 import { getTween, memoize } from './common/utils';
 import topojson from 'topojson';
@@ -8,9 +8,9 @@ import THREE from 'THREE';
 import d3 from 'd3';
 
 d3.json('data/world.json', function (err, data) {
-  var currentCountry, overlay;
+  var currentCountry, overlay, currentPoint;
 
-  var segments = 150; // number of vertices. Higher = better mouse accuracy
+  var segments = 130; // number of vertices. Higher = better mouse accuracy
 
   // Setup cache for country textures
   var countries = topojson.feature(data, data.objects.countries);
@@ -20,6 +20,9 @@ d3.json('data/world.json', function (err, data) {
     var country = geo.find(cntryID);
     return mapTexture(country, color);
   });
+
+  let pointGeometry = new THREE.SphereGeometry(1, 10, 10);
+  let pointMaterial = new THREE.MeshPhongMaterial({color: 'red'});
 
   // Base globe with blue "water"
   let blueMaterial = new THREE.MeshPhongMaterial({color: '#2B3B59', transparent: true});
@@ -35,11 +38,17 @@ d3.json('data/world.json', function (err, data) {
   var baseMap = new THREE.Mesh(new THREE.SphereGeometry(200, segments, segments), mapMaterial);
   baseMap.rotation.y = Math.PI;
 
+  // add base map layer with all countries
+  let wireMaterial  = new THREE.MeshPhongMaterial({wireframe: true, transparent: true});
+  var wireFrame = new THREE.Mesh(new THREE.SphereGeometry(201, segments, segments), wireMaterial);
+  wireFrame.rotation.y = Math.PI;
+
   // create a container node and add the two meshes
   var root = new THREE.Object3D();
-  root.scale.set(2.5, 2.5, 2.5);
+  root.scale.set(3, 3, 3);
   root.add(baseGlobe);
   root.add(baseMap);
+  root.add(wireFrame);
   scene.add(root);
 
   function onGlobeClick(event) {
@@ -69,6 +78,13 @@ d3.json('data/world.json', function (err, data) {
     // Look for country at that latitude/longitude
     var country = geo.search(latlng[0], latlng[1]);
 
+    if (currentPoint) {
+      wireFrame.remove(currentPoint);
+    }
+    currentPoint = new THREE.Mesh(pointGeometry, pointMaterial);
+    currentPoint.position.copy(getPoint.call(this, event));
+    wireFrame.add(currentPoint);
+
     if (country !== null && country.code !== currentCountry) {
 
       // Track the current country displayed
@@ -78,7 +94,7 @@ d3.json('data/world.json', function (err, data) {
       d3.select("#msg").html(country.code);
 
        // Overlay the selected country
-      map = textureCache(country.code, '#CDC290');
+      map = textureCache(country.code, 'grey');
 
       material = new THREE.MeshPhongMaterial({map: map, transparent: true});
       if (!overlay) {

@@ -5,7 +5,7 @@ var projection = d3.geo.equirectangular()
   .translate([1024, 512])
   .scale(325);
 
-export function mapTexture(json, fill, color) {
+export function mapTexture(geojson, color) {
   var texture, context, canvas;
 
   canvas = d3.select("body").append("canvas")
@@ -19,15 +19,15 @@ export function mapTexture(json, fill, color) {
     .projection(projection)
     .context(context);
 
-  context.strokeStyle = "grey";
-  context.lineWidth = 0.50;
+  context.strokeStyle = "#333";
+  context.lineWidth = 1;
   context.fillStyle = color || "#CDB380";
 
   context.beginPath();
 
-  path(json);
+  path(geojson);
 
-  if (fill) {
+  if (color) {
     context.fill();
   }
 
