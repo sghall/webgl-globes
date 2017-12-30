@@ -3,7 +3,7 @@ import { setEvents } from './common/setEvents';
 import { convertToXYZ, getEventCenter, geodecoder } from './common/geoHelpers';
 import { mapTexture } from './common/mapTexture';
 import { getTween, memoize } from './common/utils';
-import topojson from 'topojson';
+import { feature as topojsonFeature } from 'topojson';
 import THREE from 'THREE';
 import d3 from 'd3';
 
@@ -17,7 +17,7 @@ d3.json('data/world.json', function (err, data) {
   var segments = 155; // number of vertices. Higher = better mouse accuracy
 
   // Setup cache for country textures
-  var countries = topojson.feature(data, data.objects.countries);
+  var countries = topojsonFeature(data, data.objects.countries);
   var geo = geodecoder(countries.features);
 
   var textureCache = memoize(function (cntryID, color) {
